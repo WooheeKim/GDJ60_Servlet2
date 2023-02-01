@@ -27,7 +27,6 @@ public class ProductDAO {
 		
 		return num;
 		
-		
 	}
 	
 	
@@ -77,6 +76,31 @@ public class ProductDAO {
 		return result;
 	}
 	
+	public ProductDTO getProductDetail(ProductDTO productDTO) throws Exception {
+		
+		Connection connection = DBConnection.getConnection();
+		
+		String sql = "SELECT * FROM PRODUCT WHERE PRODUCTNUM=?";
+		
+		PreparedStatement st = connection.prepareStatement(sql);
+		
+		st.setInt(1, productDTO.getProductNum());
+		
+		ResultSet rs = st.executeQuery();
+		
+		if(rs.next()) {
+			productDTO = new ProductDTO();
+			productDTO.setProductNum(rs.getInt("PRODUCTNUM"));
+			productDTO.setProductName(rs.getString("PRODUCTNAME"));
+			productDTO.setProductJumsu(rs.getDouble("PRODUCTJUMSU"));
+			productDTO.setProductDetail(rs.getString("PRODUCTDETAIL"));
+		} else {
+			productDTO = null;
+		}
+		DBConnection.disConnect(rs, st, connection);
+		return productDTO;
+	}
+	
 	
 	public List<ProductDTO> getProductList() throws Exception{
 		
@@ -109,8 +133,8 @@ public class ProductDAO {
 		
 		Connection connection = DBConnection.getConnection();
 		
-		String sql = "INSERT INTO BANKBOOK (BANKBOOK_ACCOUNT, BANKBOOK_NAME, MEMBER_ID, BANKBOOK_DATE, BANKBOOK_BALANCE) "
-				+ "VALUES (?, ?, ?, 0, 0)";
+		String sql = "INSERT INTO PRODUCT (PRODUCTNUM, PRODUCTNAME, PRODUCTDETAIL, PRODUCTJUMSU) "
+				+ "VALUES (?, ?, ?, 0.0)";
 		
 		PreparedStatement st = connection.prepareStatement(sql);
 		

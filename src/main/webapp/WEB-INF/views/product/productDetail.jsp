@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Home Page</h1>
-	<a href="./product/list.do">Product List</a>
-	<a href="./member.do">Member List</a>
-	
+	<h1>상품 하나를 조회하는 페이지입니다.</h1>
 </body>
 </html>

@@ -32,6 +32,17 @@ public class HomeController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Hello WH");
+		
+		Soldier soldier = new Soldier();
+		Gun gun = new Gun();
+		Bullet bullet = new Bullet();
+		
+		soldier.setGun(gun);
+		
+		gun.setBullet(bullet);
+		
+		soldier.useGun();
+		
 //		String method = request.getMethod();
 //		System.out.println("Method : "+method);
 //		StringBuffer sb = request.getRequestURL();
